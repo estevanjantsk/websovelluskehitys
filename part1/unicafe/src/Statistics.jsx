@@ -19,10 +19,13 @@ const Statistics = ({ bad, neutral, good }) => {
     return (good / total) * 100
   }
 
+  const total = getTotal()
+
   return (
     <div>
       <h2>statistics</h2>
-      <div>
+
+      {total === 0  ? <div>No feedback given</div> : <div>
         <p>good: {good}</p>
         <p>neutral: {neutral}</p>
         <p>bad: {bad}</p>
@@ -30,7 +33,9 @@ const Statistics = ({ bad, neutral, good }) => {
         <hr />
         <p>average: { calcAverage() }</p>
         <p>positive: { calcPositive() }%</p>
-      </div>
+      </div>}
+
+      
     </div>
   )
 }
