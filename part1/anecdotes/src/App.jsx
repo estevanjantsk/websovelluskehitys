@@ -25,32 +25,59 @@ const App = () => {
     return generateRandom()
   }
 
+  const getAnecdoteWithHighestVote = () => {
+    let maxKey = null
+    let maxValue = Number.NEGATIVE_INFINITY
+  
+    for (let key in points) {
+      if (points[key] > maxValue) {
+        maxValue = points[key]
+        maxKey = key
+      }
+    }
+  
+    return maxKey
+  }
+
+  const handleVote = () => {
+    if(isNaN(points[selected])) {
+      setPoints({
+        ...points,
+        [selected]: 1
+      })
+      return
+    }
+    setPoints({
+      ...points,
+      [selected]: points[selected] + 1
+    })
+    
+  }
+
+  const handleGetRandomAnecdote = () => {
+    const random = generateRandom()
+    setSelected(random)
+  }
+
+  const mostVoted = getAnecdoteWithHighestVote()
+  
   return (
     <div>
-      <p>
-        {anecdotes[selected]}
-      </p>
-      <p>
-        has {points[selected] ? points[selected] : 0} votes
-      </p>
-      <button onClick={() => {
-        if(isNaN(points[selected])) {
-          setPoints({
-            ...points,
-            [selected]: 1
-          })
-          return
-        }
-        setPoints({
-          ...points,
-          [selected]: points[selected] + 1
-        })
-        
-      }}>vote</button>
-      <button onClick={() => {
-        const random = generateRandom()
-        setSelected(random)
-      }}>next anecdote</button>
+      <div>
+        <h2>Anecdote of the day</h2>
+        <p>
+          {anecdotes[selected]}
+        </p>
+        <p>
+          has {points[selected] ? points[selected] : 0} votes
+        </p>
+        <button onClick={handleVote}>vote</button>
+        <button onClick={handleGetRandomAnecdote}>next anecdote</button>
+      </div>
+      <div>
+        <h2>Anecdote with most votes</h2>
+        {mostVoted && anecdotes[mostVoted]}
+      </div>
     </div>
   )
 }
