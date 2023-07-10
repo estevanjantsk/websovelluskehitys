@@ -11,6 +11,25 @@ const App = () => {
   const handleNeutral = () => setNeutral(neutral + 1)
   const handleBad = () => setBad(bad + 1)
 
+  const getTotal = () => {
+    return bad + neutral + good
+  }
+
+  const calcAverage = () => {
+    const total = getTotal()
+    return total / 3
+  }
+
+  const calcPositive = () => {
+    const total = getTotal()
+
+    if(total === 0) {
+      return 0
+    }
+
+    return (good / total) * 100
+  }
+
   return (
     <div>
       <div>
@@ -30,6 +49,10 @@ const App = () => {
           <p>good: {good}</p>
           <p>neutral: {neutral}</p>
           <p>bad: {bad}</p>
+          <p>all: {bad + neutral + good}</p>
+          <hr />
+          <p>average: { calcAverage() }</p>
+          <p>positive: { calcPositive() }%</p>
         </div>
       </div>
     </div>
