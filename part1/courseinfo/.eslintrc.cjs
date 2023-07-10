@@ -16,5 +16,7 @@ module.exports = {
       'warn',
       { allowConstantExport: true },
     ],
+    'react/prop-types': 0,
+    "react/jsx-max-props-per-line": [1, { "when": "always" }]
   },
 }
