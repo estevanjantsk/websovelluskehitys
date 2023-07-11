@@ -1,6 +1,7 @@
 const Total = ({ parts }) => {
+  const total = parts.map((part) => part.exercises).reduce((sum, exercise) => sum + exercise, 0)
 
-  return <p>Number of exercises {parts[0].exercises + parts[1].exercises + parts[2].exercises}</p>
+  return <b>total of exercises {total}</b>
 }
 
 export { Total }
